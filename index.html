@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Portfolio</title>
+  <title>Haruto Tanaka Profile</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -19,6 +19,10 @@
     body {
       font-family: 'Inter', 'Noto Sans JP', sans-serif;
     }
+    /* データ内の改行(\n)をHTMLの改行として表示するためのスタイル */
+    .whitespace-pre-line {
+      white-space: pre-line;
+    }
   </style>
 </head>
 <body>
@@ -26,142 +30,204 @@
   <div id="root"></div>
 
   <script type="text/babel">
-    const { useState } = React;
+    const { useState, useEffect } = React;
 
-    // ★変更点: TypeScriptの型定義(interface)をすべて削除しました。
-
-    // --- ポートフォリオデータ ---
-    // ★変更点: 型指定 : Period[] を削除
+    // --- ポートフォリオデータ（変更後）---
     const portfolioData = [
       {
-        era: '高校生時代',
-        duration: '2019 - 2022',
-        introduction: '情報科学部に所属し、より本格的なプログラミングを学びました。文化祭では、クラスの出し物で使うアプリを開発。趣味で写真も始めました。',
+        era: '大学院修士課程',
+        duration: '2025 - 現在',
+        introduction: '航空宇宙工学科専攻に進学し，実験流体力学と数値流体力学の研究に取り組んでいます。プログラミングのスキルを活かして、研究データの解析やシミュレーションを行っています。',
         projects: [
           {
-            title: '文化祭用投票アプリ',
-            description: '文化祭のコンテストで使うリアルタイム投票アプリを、友人と共同で開発しました。',
-            imageUrl: 'https://placehold.co/600x400/10b981/ffffff?text=文化祭アプリ',
-            tags: ['Python', 'Flask', 'Firebase'],
-          },
-          {
-            title: '風景写真',
-            description: 'デジタル一眼レフカメラを買い、週末は近所の美しい風景を撮影していました。',
-            imageUrl: 'https://placehold.co/600x400/3b82f6/ffffff?text=風景写真',
-            tags: ['趣味', '写真'],
-          },
-          {
-            title: '自動水やり機',
-            description: 'Arduinoを使って、植物に自動で水をやる装置を制作。電子工作の楽しさを知りました。',
-            imageUrl: 'https://placehold.co/600x400/6366f1/ffffff?text=電子工作',
-            tags: ['Arduino', '電子工作'],
+            title: 'ISTS 2025 研究発表',
+            description: '2025年の国際宇宙技術シンポジウムで、実験流体力学に関する研究成果を発表しました。',
+            imageUrl: '',
+            tags: ['Research','Aerospace'],
+            detailedDescription: `土星の衛星エンケラドスの水蒸気噴出に関する前例のない実験装置の製作をし，データの解析を行いました．その結果を基に学会で発表しました`,
+            links: [
+              { url: 'https://ists.ne.jp', label: 'ISTS公式' },
+            ],
           },
         ],
       },
       {
-        era: '大学生時代',
-        duration: '2022 - 現在',
-        introduction: '大学ではコンピュータサイエンスを専攻。機械学習やデータサイエンスに興味を持ち、研究に取り組んでいます。長期インターンにも挑戦中です。',
+        era: '大学時代',
+        duration: '2021 - 2025',
+        introduction: '大学では航空宇宙工学を専攻．自分で物を作ることが好きで、様々なプロジェクトに取り組みました．特にプログラミングとハードウェアの組み合わせに興味があります．',
         projects: [
           {
-            title: '卒業研究：画像認識モデル',
-            description: '特定の物体を認識するためのカスタムCNNモデルを構築し、その精度を評価しました。',
-            imageUrl: 'https://placehold.co/600x400/ec4899/ffffff?text=卒業研究',
-            tags: ['機械学習', 'Python', 'TensorFlow'],
+            title: '【卒業設計】Sun-Earth L点待機PHA迎撃機 ROCK ON',
+            description: '地球と太陽のラグランジュ点に待機するPHA (潜在的に危険な小惑星) 迎撃機の設計とシミュレーションを行いました。',
+            imageUrl: 'images/pha.png',
+            tags: ['Python','機械学習','熱設計','構造設計'],
+
+            detailedDescription: `大学の卒業研究として、地球と太陽のラグランジュ点に待機するPHA (潜在的に危険な小惑星) 迎撃機の設計を行いました。\n このミッションの目的は多大な被害をもたらす小惑星の地球への衝突を防ぐことです．この宇宙機は，太陽-地球 ラグランジュ点に待機し，地球に衝突する可能性が高い直径50m級までの小惑星に衝突し，軌道変更または破壊を行います.
+
+            \n主な研究内容は、以下の通りです。\n1. 小惑星の衝突予測と迎撃タイミングの最適化\n2. 迎撃機の熱設計と構造設計\n3. 迎撃機の軌道制御とシミュレーション`,
+            links: [],  // リンクなしでも空配列でOK
           },
           {
-            title: 'インターン先でのWebアプリ開発',
-            description: 'React (Next.js) と TypeScript を用いたフロントエンド開発を担当。チーム開発の経験を積みました。',
-            imageUrl: 'https://placehold.co/600x400/8b5cf6/ffffff?text=インターン',
-            tags: ['React', 'Next.js', 'TypeScript'],
+            title: '【卒業論文】エンケラドスにおけるプルームダイナミクスの実験的研究',
+            description: '土星の衛星エンケラドスにおける水蒸気噴出のダイナミクスを実験的に研究しました．この研究で作成した実験装置は、土星の衛星エンケラドスの水蒸気噴出に関する前例のないものです．その成果が認められ，2024年度工学部長賞研究優秀賞を受賞しました．',
+            imageUrl: 'images/enceladus.png',   
+            tags: ['実験流体力学','圧縮性流体','Python'],
+
+            detailedDescription: ``,
+            links: [
+              { url: 'https://www.t.u-tokyo.ac.jp/topics/tp2025-03-31-004', label: '工学部長賞紹介ページ' },
+            ],
+          },
+          {
+            title: '【課外活動】QueenBee 自律飛行ドローンの開発',
+            description: '自律飛行ドローンの開発に取り組みました．制御班長として、ドローンの飛行アルゴリズムを設計し、実装しました．国際大会では，3位入賞を果たしました． \n ドローンとしての最長飛行記録を達成し，ゴールからの距離を最も短くすることに成功しました．',
+            imageUrl: 'images/drone.jpg',
+            tags: ['Python','ハードウェア','制御','ロボティクス'],
+
+            detailedDescription: ``,
+            links: [
+              { url: 'https://unisec.jp/archives/10330', label: '国際大会 ARLISS 結果' },
+            ],
+          },         
+        ],
+      },
+      {
+        era: '高校時代',
+        duration: '2018 - 2021',
+        introduction: '高校では天文気象部に所属し、気象観測装置の自動化に関する研究を行い，学会やコンテストでの発表を行いました．',
+        projects: [
+          {
+            title: '【部活動】物理部でのロボット製作',
+            description: '物理部でロボット製作に取り組みました．特に自律移動ロボットの制御アルゴリズムを設計しました．',
+            imageUrl: 'images/robot.jpg',
+            tags: ['Python','ハードウェア','制御'],
+
+            detailedDescription: ``,
+            links: [],
           },
         ],
+      }
+    ];
+
+    // --- 趣味データ ---
+    const hobbiesData = [
+      { title: '映画鑑賞', description: 'SF映画とドキュメンタリーを中心に週末に映画館や自宅で鑑賞しています。', imageUrl: 'images/movies.jpg', tags: [], detailedDescription: `SF映画とドキュメンタリーを中心に…`, links: [] },
+      { title: '写真撮影', description: '風景写真やポートレートを撮るのが好きで、α7 IVで撮影しています。', imageUrl: 'images/photography.jpg', tags: [], detailedDescription: `風景写真やポートレートを撮るのが好き…`, links: [] },
+      { title: '登山', description: '週末に近郊の山を登ってリフレッシュしています。', imageUrl: 'images/hiking.jpg', tags: [], detailedDescription: `週末に近郊の山を登ってリフレッシュしています。`, links: [] },
+    ];
+
+    // --- バイトデータ ---
+    const jobsData = [
+      { title: 'カフェスタッフ',
+        description: '地元のカフェでホール・バリスタ業務を担当。',
+        imageUrl: 'images/cafe.jpg',
+        tags: ['接客','チームワーク'],
+        detailedDescription: `・オーダー受付・提供\n・ドリンクの調理補助\n・売上管理サポート`,
+        links: []
+      },
+      { title: '家庭教師',
+        description: '中学生を対象に数学・英語の個別指導。',
+        imageUrl: 'images/tutor.jpg',
+        tags: ['教育','責任感'],
+        detailedDescription: `・定期テスト対策の立案\n・オンライン授業の実施\n・進捗管理`,
+        links: []
       },
     ];
 
     // --- コンポーネント ---
-    // ★変更点: 型指定 :React.FC を削除
     const Header = () => (
       <header className="bg-gray-900 text-white p-4 sticky top-0 z-50 shadow-lg">
         <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold font-sans">My Portfolio</h1>
+          <h1 className="text-2xl font-bold">Haruto Tanaka</h1>
           <nav>
-            <a href="#about" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
-            <a href="#timeline" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Timeline</a>
+            <a href="#about"   className="text-gray-300 hover:text-white px-3 py-2 text-sm">About</a>
+            <a href="#hobbies" className="text-gray-300 hover:text-white px-3 py-2 text-sm">Hobbies</a>
+            <a href="#timeline"className="text-gray-300 hover:text-white px-3 py-2 text-sm">Timeline</a>
           </nav>
         </div>
       </header>
     );
 
-    // ★変更点: 型指定 :React.FC を削除
     const ProfileCard = () => (
       <section id="about" className="py-20 bg-white">
         <div className="container mx-auto px-6 text-center">
           <img
-            src="https://placehold.co/150x150/d1d5db/374151?text=Your+Photo"
+            src="images/profile.jpg"
             alt="あなたの写真"
             className="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-purple-500 shadow-xl"
           />
-          <h2 className="text-4xl font-extrabold text-gray-800 mb-2">あなたの名前</h2>
+          <h2 className="text-4xl font-extrabold text-gray-800 mb-2">Haruto Tanaka</h2>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            ここに自己紹介文を記述します。プログラミングへの情熱、将来の夢、趣味など、あなたの人柄が伝わるような文章を書きましょう。
+            航空宇宙工学を専攻しています． 
+          </p>
+          <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+            実験流体力学と数値流体力学の研究に取り組んでおり、< br /> プログラミングを活用してデータ解析やシミュレーションを行っています．<br />
+            PythonやC++を使用して、研究やプロジェクトに取り組んでいます．
           </p>
           <div className="flex justify-center space-x-4">
-            <a href="#" className="bg-gray-800 text-white font-bold py-2 px-4 rounded-full hover:bg-purple-600 transition-colors duration-300">
+            <a href="https://github.com/haruto0106" className="bg-gray-800 text-white font-bold py-2 px-4 rounded-full hover:bg-purple-600 transition-colors duration-300">
               GitHub
             </a>
-            <a href="#" className="bg-gray-800 text-white font-bold py-2 px-4 rounded-full hover:bg-purple-600 transition-colors duration-300">
-              X (Twitter)
-            </a>
+
           </div>
         </div>
       </section>
     );
 
-    // ★変更点: 型指定を削除
-    const DetailPage = ({ project, onBack }) => (
+    // ★変更点: プロジェクト固有の詳細情報を表示するように修正
+    const DetailPage = ({ item, onBack }) => (
       <div className="container mx-auto px-6 py-12 bg-white rounded-xl shadow-lg mt-8 mb-8">
         <button
           onClick={onBack}
           className="bg-gray-200 text-gray-800 font-bold py-2 px-4 rounded-full hover:bg-gray-300 transition-colors duration-300 mb-8"
         >
-          &larr; タイムラインに戻る
+          &larr; 戻る
         </button>
-        <h2 className="text-4xl font-bold text-gray-800 mb-6">{project.title}</h2>
+        <h2 className="text-4xl font-bold text-gray-800 mb-6">{item.title}</h2>
         <img
-          src={project.imageUrl}
-          alt={project.title}
+          src={item.imageUrl}
+          alt={item.title}
           className="w-full h-auto rounded-lg mb-8 shadow-md"
         />
-        <p className="text-lg text-gray-700 leading-relaxed mb-8">{project.description}</p>
+        <p className="text-lg text-gray-700 leading-relaxed mb-8">{item.description}</p>
         <div className="flex flex-wrap gap-3">
-          {project.tags.map(tag => (
+          {item.tags?.map(tag => (
             <span key={tag} className="bg-purple-100 text-purple-800 text-md font-semibold px-3 py-1 rounded-full">
               {tag}
             </span>
            ))}
         </div>
+
+        {/* --- ここからが修正箇所 --- */}
         <div className="mt-12 p-6 bg-gray-50 rounded-lg border border-gray-200">
           <h3 className="text-2xl font-bold text-gray-800 mb-4">プロジェクトの詳細情報</h3>
-          <p className="text-gray-600">
-            ここには、プロジェクトに関する追加の技術的な詳細、使用したツール、学んだことなどを記述できます。
-            例えば、このプロジェクトのデモリンクやGitHubリポジトリへのリンクを追加することも可能です。
+          {/* project.detailedDescription を表示。whitespace-pre-lineで改行も反映 */}
+          <p className="text-gray-600 whitespace-pre-line">
+            {item.detailedDescription}
           </p>
+          
+          {/* リンクが存在する場合のみ表示 */}
           <div className="mt-4 flex flex-wrap gap-4">
-            <a href="#" className="text-purple-600 hover:underline font-semibold flex items-center">
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-              ライブデモを見る
-            </a>
-            <a href="#" className="text-purple-600 hover:underline font-semibold flex items-center">
-              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 0C4.477 0 0 4.484 0 10.017c0 4.417 2.879 8.167 6.84 9.5.5.092.682-.217.682-.483 0-.237-.008-.867-.013-1.7-2.782.6-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.465-1.11-1.465-.908-.618.069-.606.069-.606 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.089 2.91.832.092-.647.35-1.089.636-1.334-2.22-.253-4.555-1.115-4.555-4.954 0-1.091.39-1.984 1.029-2.682-.107-.253-.448-1.272.097-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0110 4.885c.85.004 1.7.11 2.5.324 1.909-1.296 2.747-1.025 2.747-1.025.546 1.379.204 2.398.097 2.65.64.698 1.029 1.591 1.029 2.682 0 3.84-2.339 4.691-4.566 4.945.359.31.678.921.678 1.855 0 1.336-.012 2.419-.012 2.747 0 .268.18.579.688.482C17.12 18.175 20 14.425 20 10.017c0-5.533-4.477-10.017-10-10.017z" clipRule="evenodd"></path></svg>
-              GitHubリポジトリ
-            </a>
+            {item.links?.map((link, i) => (
+              <a
+                key={i}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-purple-600 hover:underline font-semibold flex items-center"
+              >
+                {/* アイコンは必要に応じて入れ替え */}
+                <svg className="w-5 h-5 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+        </svg>
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>
     );
 
-    // ★変更点: 型指定を削除
     const ProjectCard = ({ project, onClick }) => (
       <div
         className="bg-white rounded-xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 ease-in-out cursor-pointer"
@@ -186,29 +252,79 @@
       </div>
     );
 
-    // ★変更点: 型指定 :React.FC を削除
+    // --- 小さいカード用コンポーネント ---
+    const SmallCard = ({ item, onClick }) => (
+      <div
+        className="bg-white rounded-lg shadow-sm overflow-hidden transform hover:-translate-y-1 transition cursor-pointer"
+        onClick={() => onClick(item)}
+      >
+        <img
+          src={item.imageUrl}
+          alt={item.title}
+          className="w-full h-32 object-cover"
+        />
+        <div className="p-3">
+          <h3 className="text-lg font-medium text-gray-800 truncate">{item.title}</h3>
+        </div>
+      </div>
+    );
+
     const App = () => {
-      // ★変更点: 型指定 <Project | null> を削除
-      const [selectedProject, setSelectedProject] = useState(null);
+      const [selectedItem, setSelectedItem] = useState(null);
 
-      // ★変更点: 型指定 (project: Project) を削除
-      const handleProjectClick = (project) => {
-        setSelectedProject(project);
+      // popstate でブラウザの戻る/進むをハンドル
+      useEffect(() => {
+        const onPop = e => {
+          if (e.state?.item) setSelectedItem(e.state.item);
+          else setSelectedItem(null);
+        };
+        window.addEventListener('popstate', onPop);
+        return () => window.removeEventListener('popstate', onPop);
+      }, []);
+
+      const handleItemClick = item => {
+        // 履歴に state を追加
+        window.history.pushState({ item }, '', '');
+        setSelectedItem(item);
       };
 
-      const handleBackToTimeline = () => {
-        setSelectedProject(null);
-      };
+      const handleBack = () => window.history.back();
 
       return (
-        <div className="bg-gray-50 font-sans leading-normal tracking-wider">
+        <div className="bg-gray-50 font-sans">
           <Header />
           <main>
-            {selectedProject ? (
-              <DetailPage project={selectedProject} onBack={handleBackToTimeline} />
+            {selectedItem ? (
+              <DetailPage item={selectedItem} onBack={handleBack}/>
             ) : (
               <>
                 <ProfileCard />
+
+                {/* Hobbies セクション */}
+                <section id="hobbies" className="py-20 bg-white">
+                  <div className="container mx-auto px-6">
+                    <h2 className="text-4xl font-extrabold text-center mb-12">Hobbies</h2>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                      {hobbiesData.map((h, i) => (
+                        <SmallCard key={i} item={{...h, imageUrl: h.imageUrl}} onClick={handleItemClick}/>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                {/* Jobs セクション */}
+                <section id="jobs" className="py-20 bg-gray-50">
+                  <div className="container mx-auto px-6">
+                    <h2 className="text-4xl font-extrabold text-center mb-12">Part-time Jobs</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      {jobsData.map((j, i) => (
+                        <SmallCard key={i} item={{...j, imageUrl: j.imageUrl}} onClick={handleItemClick}/>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+
+                {/* Timeline セクション */}
                 <section id="timeline" className="py-20 bg-gray-100">
                   <div className="container mx-auto px-6">
                     <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-16">My Timeline</h2>
@@ -230,7 +346,7 @@
                                         <p className="text-gray-600 mb-6">{period.introduction}</p>
                                         <div className="grid grid-cols-1 gap-6">
                                             {period.projects.map((project, pIndex) => (
-                                                <ProjectCard key={pIndex} project={project} onClick={handleProjectClick} />
+                                                <ProjectCard key={pIndex} project={project} onClick={handleItemClick} />
                                             ))}
                                         </div>
                                     </div>
