@@ -15,6 +15,13 @@
   <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pVIzGZsYKTBSaM+nU2DNga+8+VxSheP+1G3iZjriBUvsZ/EjUjTWjKIgL9yjR+lc+OMM6Xixdq8WveVAh5a9ZA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"
+  />
+
   <style>
     body {
       font-family: 'Inter', 'Noto Sans JP', sans-serif;
@@ -97,13 +104,18 @@
         introduction: '高校では天文気象部に所属し、気象観測装置の自動化に関する研究を行い，学会やコンテストでの発表を行いました．',
         projects: [
           {
-            title: '【部活動】物理部でのロボット製作',
-            description: '物理部でロボット製作に取り組みました．特に自律移動ロボットの制御アルゴリズムを設計しました．',
-            imageUrl: 'images/robot.jpg',
-            tags: ['Python','ハードウェア','制御'],
+            title: '【研究】視程自動観測装置の開発',
+            description: '視程とはどこまで見通せるかの距離を示す気象情報です．視程観測は本校で70年以上続く伝統であり，貴重なデータを蓄積しています．視程観測は定時に人の目で行うため、欠測が出てしまう問題がありました．そこで，視程自動観測装置を開発し，常に視程を観測できるようにしました．また，コロナ禍での目視観測の難しさを解決することができました． ',
+            imageUrl: 'images/image.png',
+            tags: ['Python','ハードウェア','制御','カメラ'],
 
-            detailedDescription: ``,
-            links: [],
+            detailedDescription: ` 気象観測機器コンテストでは，代表理事特別賞を受賞しました．\nまた，JpGU (地球惑星連合学会) の高校生セッションでは，優秀研究賞・優秀ポスター賞を受賞しました．\n 中高生情報学研究コンテストでは最優秀賞を受賞しました．`,
+            links: [
+                { url: 'https://www.wxbunka.com/cms/wp-content/uploads/2017/01/report-of-8th-No3.pdf', label: '気象観測機器コンテスト 受賞' },
+                { url:'https://confit.atlas.jp/guide/event/jpgu2020/subject/O04-P64/detail', label: 'JpGU 研究概要' },
+                { url: 'https://www.jpgu.org/highschool_session/2020v/images/2020v_hsposter_sokuhou.pdf', label: 'JpGU 受賞' },
+                { url: 'https://activity.miraibook.jp/live/210401/16/', label: '中高生情報学研究コンテスト受賞時 取材' },
+            ],
           },
         ],
       }
@@ -111,9 +123,9 @@
 
     // --- 趣味データ ---
     const hobbiesData = [
-      { title: '写真撮影', description: '星空や風景写真を撮るのが好きで、Nikon D5600, iPhone 15 Proで撮影しています。', imageUrl: 'images/butter.jpg', tags: [], detailedDescription: `星の写真や風景の写真を撮っています．お気に入りの場所は新宿御苑です．`, links: [] },
-      {title: '天体観測', description: '天体観測が趣味で、特に星座や惑星の観察を楽しんでいます。', imageUrl: 'images/stars.jpg', tags: [], detailedDescription: `星座や惑星の観察をしています．お気に入りの星座はイルカ座です`, links: [] },
-      {title: '電子工作', description: 'ArduinoやRaspberry Piを使った電子工作が好きで、様々なプロジェクトに取り組んでいます。', imageUrl: 'images/electronics.jpg', tags: [], detailedDescription: `ArduinoやRaspberry Piを使った電子工作をしています．最近はSQLに手を出しています`, links: [] }
+      { title: '写真撮影', description: '星空や風景写真を撮るのが好きです．Nikon D5600, iPhone 15 Proで撮影しています。', imageUrl: 'images/butter.jpg', tags: [], detailedDescription: ``, links: [] },
+      {title: '天体観測', description: '天体観測が趣味で、特に星座や惑星の観察を楽しんでいます。', imageUrl: 'images/stars.jpg', tags: [], detailedDescription: '', links: [] },
+      {title: '電子工作', description: 'ArduinoやRaspberry Piを使った電子工作が好きで、様々なプロジェクトに取り組んでいます。', imageUrl: 'images/denshi.png', tags: [], detailedDescription: `ArduinoやRaspberry Piを使った電子工作をしています．最近はSQLに手を出しています`, links: [] }
     ];
 
     // --- バイトデータ ---
@@ -123,21 +135,27 @@
         imageUrl: 'images/tachiko.png',
         tags: ['研究','論文'],
         detailedDescription: ``,
-        links: []
+        links: [],
+        hideImage: true,
+        icon: 'ta'
       },
       { title: '塾講師',
         description: '中学生を対象に数学・英語の個別指導。',
-        imageUrl: 'images/tutor.jpg',
+        imageUrl: '',
         tags: ['教育','責任感'],
         detailedDescription: `・定期テスト対策の立案\n・オンライン授業の実施\n・進捗管理`,
-        links: []
+        links: [],
+        hideImage: true,
+        icon: 'tutor'
       },
       { title: '電子部品販売スタッフ',
-        description: '秋葉原の電子部品店で、接客と商品管理を担当しました。',
-        imageUrl: 'images/tutor.jpg',
+        description: '秋葉原の電子部品店で、接客を担当しました。',
+        imageUrl: '',
         tags: ['責任感'],
         detailedDescription: ``,
-        links: []
+        links: [],
+        hideImage: true,
+        icon: 'electronics'
       }
     ];
 
@@ -149,6 +167,7 @@
           <nav>
             <a href="#about"   className="text-gray-300 hover:text-white px-3 py-2 text-sm">About</a>
             <a href="#hobbies" className="text-gray-300 hover:text-white px-3 py-2 text-sm">Hobbies</a>
+            <a href="#jobs"    className="text-gray-300 hover:text-white px-3 py-2 text-sm">Jobs</a>
             <a href="#timeline"className="text-gray-300 hover:text-white px-3 py-2 text-sm">Timeline</a>
           </nav>
         </div>
@@ -190,12 +209,14 @@
         >
           &larr; 戻る
         </button>
-        <h2 className="text-4xl font-bold text-gray-800 mb-6">{item.title}</h2>
-        <img
-          src={item.imageUrl}
-          alt={item.title}
-          className="w-full h-auto rounded-lg mb-8 shadow-md"
-        />
+        <h2 className="text-4xl font-bold mb-6">{item.title}</h2>
+        { !item.hideImage && item.imageUrl && (
+          <img
+            src={item.imageUrl}
+            alt={item.title}
+            className="w-full h-auto rounded-lg mb-8 shadow-md"
+          />
+        )}
         <p className="text-lg text-gray-700 leading-relaxed mb-8">{item.description}</p>
         <div className="flex flex-wrap gap-3">
           {item.tags?.map(tag => (
@@ -260,21 +281,74 @@
     );
 
     // --- 小さいカード用コンポーネント ---
-    const SmallCard = ({ item, onClick }) => (
-      <div
-        className="bg-white rounded-lg shadow-sm overflow-hidden transform hover:-translate-y-1 transition cursor-pointer"
-        onClick={() => onClick(item)}
-      >
+const SmallCard = ({ item, onClick }) => {
+  // SVGアイコンの定義
+  const renderIcon = () => {
+    switch (item.icon) {
+      case 'ta':
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l6.16-3.422A12.083 12.083 0 0118 20.25H6a12.083 12.083 0 01-.16-9.672L12 14z" />
+          </svg>
+        );
+      case 'tutor':
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+    d="M12 14c3 0 4-1.5 4-4s-1-4-4-4-4 1.5-4 4 1 4 4 4zM6 18c0-1.5 3-2.25 6-2.25S18 16.5 18 18v1H6v-1z" />
+</svg>
+        );
+      case 'electronics':
+        return (
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-12 h-12 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+              d="M9 2v2m6-2v2M9 20v2m6-2v2M4 9H2m2 6H2m20-6h-2m2 6h-2M7 7h10v10H7V7z" />
+          </svg>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div
+      className={`
+        rounded-lg shadow-lg transform hover:-translate-y-1 transition cursor-pointer
+        overflow-hidden    /* 追加: 角丸部分で画像をクリップ */
+        ${item.hideImage ? 'bg-purple-50 hover:bg-purple-100' : 'bg-white'}
+      `}
+      onClick={() => onClick(item)}
+    >
+      {item.hideImage ? (
+        /* 画像なしモード */
+        <div className="flex items-center justify-center h-32">
+          {renderIcon()}
+        </div>
+      ) : (
+        /* 画像ありモード: 上部の角丸を image にも適用 */
         <img
           src={item.imageUrl}
           alt={item.title}
-          className="w-full h-32 object-cover"
+          className="w-full h-32 object-cover rounded-t-lg"
         />
-        <div className="p-3">
-          <h3 className="text-lg font-medium text-gray-800 truncate">{item.title}</h3>
-        </div>
+      )}
+      <div className={`p-4 text-center ${item.hideImage ? 'pt-6' : ''}`}>
+        <h3 className={`
+          ${item.hideImage
+            ? 'text-xl font-bold text-purple-800'
+            : 'text-lg font-semibold text-gray-800'}
+        `}>
+          {item.title}
+        </h3>
+        {item.hideImage && (
+          <p className="text-sm text-purple-700 mt-1 truncate">{item.description}</p>
+        )}
       </div>
-    );
+    </div>
+  );
+};
+
 
     const App = () => {
       const [selectedItem, setSelectedItem] = useState(null);
@@ -343,7 +417,7 @@
                                     <h1 className="mx-auto font-semibold text-lg text-white">{index + 1}</h1>
                                 </div>
                                 <div className="order-2 bg-white rounded-lg shadow-xl w-full max-w-lg px-6 py-4 mx-auto">
-                                   <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                                   <div className="bg-gray-100 p-6 rounded-xl shadow-md border border-gray-200">
                                         <div className="flex items-center mb-4">
                                             <div>
                                                 <h2 className="text-2xl font-bold text-gray-800">{period.era}</h2>
